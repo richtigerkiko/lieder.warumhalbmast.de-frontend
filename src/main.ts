@@ -1,5 +1,9 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import { Amplify } from 'aws-amplify'
+import awsExports from './aws-exports';
+Amplify.configure(awsExports);
+
 import "bootstrap/dist/css/bootstrap.css"
 import "bootstrap-icons/font/bootstrap-icons.css"
 
