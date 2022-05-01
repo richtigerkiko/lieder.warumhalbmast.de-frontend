@@ -6,7 +6,7 @@ import navIndex from '@/components/navigation/navIndex.vue'
 
 <template>
   <header class="container">
-    <navIndex />
+    <!-- <navIndex /> -->
   </header>
   <RouterView />
 </template>

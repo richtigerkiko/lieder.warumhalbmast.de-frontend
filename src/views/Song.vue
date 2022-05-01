@@ -1,19 +1,17 @@
-<script setup lang="ts"></script>
-
 <template>
   <main class="container">
+    <songNav />
     <h1 class="mt-2">La Paloma</h1>
-
-              <p>
-          Ein Wind weht von Süd <br />
-          Und zieht mich hinaus auf See. <br />
-          Mein Kind, sei nicht traurig, <br />
-          Tut der Abschied auch weh. <br />
-          Mein Herz geht an Bord <br />
-          Und fort muß die Reise geh'n, <br />
-          Dein Schmerz wird vergeh'n <br />
-          Und schön wird das Wiederseh'n.
-        </p>
+    <p>
+      Ein Wind weht von Süd <br />
+      Und zieht mich hinaus auf See. <br />
+      Mein Kind, sei nicht traurig, <br />
+      Tut der Abschied auch weh. <br />
+      Mein Herz geht an Bord <br />
+      Und fort muß die Reise geh'n, <br />
+      Dein Schmerz wird vergeh'n <br />
+      Und schön wird das Wiederseh'n.
+    </p>
 
     <p>
       Mich trägt die Sehnsucht fort <br />
@@ -43,3 +41,7 @@
     </p>
   </main>
 </template>
+<script setup lang="ts">
+import songNav from '@/components/navigation/songNav.vue'
+</script>
+
