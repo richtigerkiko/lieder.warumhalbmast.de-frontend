@@ -10,6 +10,11 @@
       "StackName": "amplify-liederwarumhalbmastd-dev-132045",
       "StackId": "arn:aws:cloudformation:eu-central-1:012583441819:stack/amplify-liederwarumhalbmastd-dev-132045/c27f8630-c940-11ec-af3c-0a9a441eabe8",
       "AmplifyAppId": "d1882ne7dm1hoe"
+    },
+    "categories": {
+      "auth": {
+        "liederwarumhalbmastd": {}
+      }
     }
   }
 }

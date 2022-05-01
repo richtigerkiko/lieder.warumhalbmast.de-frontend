@@ -1,9 +1,14 @@
 <template>
   <main class="container pb-5">
     <div class="row">
-    <div class="col"></div>
+      <div class="col"></div>
       <form class="d-flex py-3">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
         <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
       </form>
     </div>
@@ -12,13 +17,23 @@
         <h1>Lieder Übersicht</h1>
       </div>
       <div class="col text-end">
-        <i class="h1 text-primary bi bi-plus-circle-fill"></i> <i class="h1 text-primary bi bi-person-circle"></i>
+        <div class="row">
+        <div class="col">
+          <i v-if="(userStore().isLoggedIn)" class="h1 text-primary bi bi-plus-circle-fill"></i>
+        </div>
+        <div class="col">
+          <router-link to="/login"><i class="h1 text-primary bi bi-person-circle"></i></router-link>
+        </div>
+        </div>
+         
       </div>
-    </div>  
+    </div>
     <div class="row">
       <h4 class="my-3">L</h4>
       <ul class="list-group">
-        <li class="list-group-item"><router-link to="/song">La Paloma</router-link></li>
+        <li class="list-group-item">
+          <router-link to="/song">La Paloma</router-link>
+        </li>
       </ul>
       <h3 class="my-3">A</h3>
       <ul class="list-group">
@@ -52,7 +67,15 @@
         <li class="list-group-item">Dona nobis pacem</li>
       </ul>
     </div>
+    {{ userStore().isLoggedIn }}
   </main>
 </template>
 <script setup lang="ts">
+import { RouterLink } from "vue-router";
+import { onMounted } from "vue";
+import {userStore} from '@/stores/userStore'
+
+onMounted(() => {
+
+});
 </script>
