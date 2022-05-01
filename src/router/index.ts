@@ -13,20 +13,12 @@ const router = createRouter({
       component: SongOverview
     },
     {
-      path: '/song',
+      path: '/song/:id',
       name: 'song',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/Song.vue')
-    },
-    {
-      path: '/editsong',
-      name: 'editsong',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/EditSong.vue')
     },
     {
       path: '/login',

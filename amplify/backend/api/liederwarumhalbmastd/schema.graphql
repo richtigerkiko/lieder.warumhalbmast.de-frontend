@@ -1,6 +1,17 @@
+type Verse @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  songID: ID! @index(name: "bySong")
+  position: Int
+  text: String
+  editor: String
+  editorJSID: String
+  editorJSType: String
+}
+
 type Song @model @auth(rules: [{allow: public}]) {
   id: ID!
   songname: String
-  songtext: String
   editor: String
+  Verses: [Verse] @hasMany(indexName: "bySong", fields: ["id"])
 }
+ 

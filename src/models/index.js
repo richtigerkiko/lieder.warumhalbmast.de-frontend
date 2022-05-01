@@ -4,8 +4,9 @@ import { schema } from './schema';
 
 
 
-const { Song } = initSchema(schema);
+const { Verse, Song } = initSchema(schema);
 
 export {
+  Verse,
   Song
 };
