@@ -11,7 +11,7 @@
       <div class="col-8">
         <h1>Lieder Übersicht</h1>
       </div>
-      <div class="col text-center">
+      <div class="col text-end">
         <i class="h1 text-primary bi bi-plus-circle-fill"></i> <i class="h1 text-primary bi bi-person-circle"></i>
       </div>
     </div>  
