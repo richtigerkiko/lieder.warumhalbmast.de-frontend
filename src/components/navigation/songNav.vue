@@ -6,10 +6,10 @@
             <router-link to="/" class="nav-link"><i class="bi bi-arrow-bar-left"></i> Back</router-link>
           </li>
           <li class="nav-item" v-if="!editing && userStore().isLoggedIn">
-            <button  @click="toggleedit" class="nav-link btn btn-link" href="#"><i class="bi bi-pencil-fill"></i> Edit</button>
+            <button  @click="emit('toggleEdit')" class="nav-link btn btn-link" href="#"><i class="bi bi-pencil-fill"></i> Edit</button>
           </li>
           <li class="nav-item" v-if="editing && userStore().isLoggedIn">
-            <button @click="toggleedit" class="nav-link btn btn-link" href="#"><i class="bi bi-cloud-arrow-up-fill"></i> Save</button>
+            <button @click="emit('toggleEdit')" class="nav-link btn btn-link" href="#"><i class="bi bi-cloud-arrow-up-fill"></i> Save</button>
           </li>
           <li class="nav-item" v-if="userStore().isLoggedIn">
             <a class="nav-link text-danger" href="#"><i class="bi bi-trash-fill"></i> Delete</a>
@@ -26,11 +26,8 @@ import { ref } from 'vue'
 import { userStore } from "@/stores/userStore";
 
 const emit = defineEmits(['toggleEdit'])
+defineProps({
+  editing: Boolean
+})
 
-const editing = ref(false)
-
-function toggleedit () {
-  editing.value = !editing.value
-  emit('toggleEdit')
-}
 </script>

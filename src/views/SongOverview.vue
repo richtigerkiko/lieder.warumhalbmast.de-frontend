@@ -19,7 +19,7 @@
       <div class="col text-end">
         <div class="row">
         <div class="col">
-          <i v-if="(userStore().isLoggedIn)" class="h1 text-primary bi bi-plus-circle-fill"></i>
+           <router-link to="/song/new"><i v-if="(userStore().isLoggedIn)" class="h1 text-primary bi bi-plus-circle-fill"></i></router-link>
         </div>
         <div class="col">
           <router-link to="/login"><i class="h1 text-primary bi bi-person-circle"></i></router-link>
@@ -30,11 +30,13 @@
     </div>
     <div class="row">
       <h4 class="my-3">L</h4>
-      <ul class="list-group">
+      <ul v-for="song in songs" class="list-group">
         <li class="list-group-item">
-          <router-link to="/song">La Paloma</router-link>
+          <router-link :to="'/song/'+song.id">{{song.songname}}</router-link>
         </li>
       </ul>
+      <br><br><br>
+      <h5>-- DummyData --</h5>
       <h3 class="my-3">A</h3>
       <ul class="list-group">
         <li class="list-group-item">Ade zur guten Nacht</li>
@@ -72,10 +74,14 @@
 </template>
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import {userStore} from '@/stores/userStore'
+import { Song } from "@/models";
+import { DataStore } from "aws-amplify";
 
-onMounted(() => {
+const songs = ref(Array<Song>())
 
+onMounted(async () => {
+  songs.value = await DataStore.query(Song)
 });
 </script>

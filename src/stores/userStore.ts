@@ -5,18 +5,27 @@ export const userStore = defineStore({
   id: 'userStore',
   state: () => ({
     isLoggedIn: false,
-    userInfo: null
+    userInfo: null,
   }),
   getters: {
+    displayName: (state) => {
+      if(state.userInfo === null){
+        return ""
+      }
+      else{
+        return `${state.userInfo.attributes.given_name} ${state.userInfo.attributes.family_name}`
+      }
+    }
   },
   actions: {
     async getLoginState() {
       try {
         const userSession = await Auth.currentAuthenticatedUser();
-        const user = await Auth.currentUserInfo();
+        this.userInfo = await Auth.currentUserInfo();
         this.isLoggedIn = true
       } catch {
         this.isLoggedIn = false
+        this.userInfo = null
       }
     }
   }

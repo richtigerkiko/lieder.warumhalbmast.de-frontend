@@ -1,59 +1,101 @@
 <template>
   <main class="container">
-    <songNav @toggleEdit="ToggleEditSong" />
+    <songNav @toggleEdit="ToggleEditSong" :editing="isEditing" />
     <div class="row">
       <div class="col">
-        <h1 class="mt-2">La Paloma</h1>
+        <div class="my-5" v-if="isEditing">
+          <input type="text" class="form-control" placeholder="SongTitle" v-model="test.songname"/>
+        </div>
+        <h1 v-else class="mt-2">{{ song.songname }}</h1>
       </div>
     </div>
     <div class="row">
       <div class="col" ref="editor"></div>
-    </div>
+    </div>  
   </main>
 </template>
 <script setup lang="ts">
 import songNav from "@/components/navigation/songNav.vue";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref  } from "vue";
 import EditorJS from "@editorjs/editorjs";
-import { useRoute } from "vue-router";
-
+import { useRoute, useRouter } from "vue-router";
+import { userStore } from "@/stores/userStore";
+import { DataStore } from "aws-amplify";
+// import { Song, Verse } from "@/models";
+import { convertApiVerseToEditorJsBlocks, convertEditorJsBlocksToApiVerse } from "@/helper/converts";
+import { Song, Verse } from "@/models";
 
 const editor = ref(null);
 let edit: EditorJS | null = null;
+const router = useRouter()
 
-function SaveSong() {
-  edit?.save().then((data) => {
-    console.log(data);
-  });
-}
-function ToggleEditSong () {
-  console.log(edit?.readOnly.isEnabled)
-  edit?.readOnly.toggle()  
-}
+const isNewSong = ref(true)
+
+// const writableSongTilte = ref("Dödel Song Title")
+
+const song = ref(new Song({
+  songname: "Dödel Song Title",
+  editor: userStore().displayName
+}))
+
+const test = ref({
+  songname: "asd",
+  test2: 0
+})
+
+const verses = ref([] as Verse[])
+
+const isEditing = ref(true)
 
 onMounted(() => {
-  console.log(useRoute().params.id)
+  if(useRoute().params.id as string === 'new'){
+    isNewSong.value = true
+  }
+  getPageData();
+});
+
+
+
+async function SaveSong() {
+  const data = await edit?.save()
+  const s = await DataStore.save(song.value)
+  const newverses = convertEditorJsBlocksToApiVerse(data!.blocks, s.id);
+  verses.value.forEach((v) => DataStore.delete(Verse, todelete => todelete.id("eq", v.id)));
+  newverses.forEach((v) => DataStore.save(v));
+  router.push("/song/" + song.value.id)
+}
+
+function ToggleEditSong() {
+  if(isEditing.value){
+    SaveSong()
+  }
+  
+  isEditing.value = !isEditing.value
+  edit?.readOnly.toggle();
+}
+
+async function getPageData() {
+  const searchedSong = await DataStore.query(Song, useRoute().params.id as string)
+  if(searchedSong){
+    song.value = searchedSong
+    isEditing.value = false
+  } 
+  verses.value = (await DataStore.query(Verse))
+    .filter((v) => v.songID === song.value.id)
+    .sort((a, b) => a.position! - b.position!);
+  initEditorJs();
+}
+
+function initEditorJs() {
   edit = new EditorJS({
     holder: editor.value!,
-    readOnly: true,
-    data: {
-      blocks: [
-        {
-          id: "I6mog6MU1T",
-          type: "paragraph",
-          data: {
-            text: "Ein Wind weht von Süd<br>Und zieht mich hinaus auf See.<br>Mein Kind, sei nicht traurig,<br>Tut der Abschied auch weh.<br>Mein Herz geht an Bord<br>Und fort muß die Reise geh'n,<br>Dein Schmerz wird vergeh'n<br>Und schön wird das Wiederseh'n.&nbsp;&nbsp;",
-          },
-        },
-        {
-          id: "2HoEED1UBj",
-          type: "paragraph",
-          data: {
-            text: "Mich trägt die Sehnsucht fort<br>In die blaue Ferne,<br>Unter mir Meer<br>Und über mir Nacht und Sterne.<br>Vor mir die Welt, so treibt mich<br>Der Wind des Lebens.<br>Wein nicht, mein Kind,<br>Die Tränen, die sind vergebens!&nbsp;&nbsp;",
-          },
-        },
-      ],
-    },
+    readOnly: !(isNewSong.value),
+    placeholder: "write your Song BUDDY",
+    data:{
+      blocks: convertApiVerseToEditorJsBlocks(verses.value)
+    }
   });
-});
+}
+
+
 </script>

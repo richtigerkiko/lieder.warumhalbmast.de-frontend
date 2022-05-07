@@ -13,5 +13,4 @@ type Song @model @auth(rules: [{allow: public}]) {
   songname: String
   editor: String
   Verses: [Verse] @hasMany(indexName: "bySong", fields: ["id"])
-}
- 
+} 
