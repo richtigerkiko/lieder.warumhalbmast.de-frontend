@@ -1,4 +1,5 @@
-import { Verse } from "@/models";
+import songNavVue from "@/components/navigation/songNav.vue";
+import { Song, Verse } from "@/models";
 import type { OutputBlockData } from "@editorjs/editorjs";
 
 export function convertApiVerseToEditorJsBlocks(verses: Verse[]) {
@@ -32,3 +33,28 @@ export function convertEditorJsBlocksToApiVerse(jsBlock: OutputBlockData[], song
     }
     return returnArray;
 }
+
+export function convertSongsToAlphabetArray(song:Song[]){
+    let alphabetArray:AlphabeticalSong[] = []
+    const alphabet = ["#","A","Ä","B","C","D","E","F","G","H","I","J","K","L","M","N","O","Ö","P","Q","R","S","T","U","Ü","V","W","X","Y","Z"];
+    alphabet.forEach(letter => {
+        let songs = new Array<Song>()
+        if(letter === "#"){
+            songs = song.filter(x => !alphabet.some(char => x.songname?.charAt(0).toUpperCase() === char.toUpperCase())).sort((a,b) => a.songname!.localeCompare(b.songname!))
+        }
+        else{
+            songs = song.filter(x => x.songname?.charAt(0).toUpperCase() === letter).sort((a,b) => a.songname!.localeCompare(b.songname!))
+        }
+        alphabetArray.push({
+            letter: letter,
+            songs: songs
+        })
+    });
+
+    return alphabetArray
+}
+
+export type AlphabeticalSong = {
+    letter: string,
+    songs: Song[]
+  };

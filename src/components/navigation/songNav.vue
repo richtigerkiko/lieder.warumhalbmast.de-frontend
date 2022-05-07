@@ -10,7 +10,7 @@
             Edit</button>
         </li>
         <li class="nav-item" v-if="editing && userStore().isLoggedIn">
-          <button @click="emit('toggleEdit')" class="nav-link btn btn-link" href="#"><i
+          <button @click="emit('toggleEdit')" class="nav-link btn btn-link link-success" href="#"><i
               class="bi bi-cloud-arrow-up-fill"></i> Save</button>
         </li>
         <li class="nav-item" v-if="userStore().isLoggedIn && !isNewSong">

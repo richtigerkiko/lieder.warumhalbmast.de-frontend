@@ -92,6 +92,12 @@ export const schema = {
                             {
                                 "allow": "public",
                                 "operations": [
+                                    "read"
+                                ]
+                            },
+                            {
+                                "allow": "private",
+                                "operations": [
                                     "create",
                                     "update",
                                     "delete",
@@ -113,11 +119,11 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "songname": {
-                    "name": "songname",
+                "title": {
+                    "name": "title",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "editor": {
@@ -140,6 +146,13 @@ export const schema = {
                         "connectionType": "HAS_MANY",
                         "associatedWith": "songID"
                     }
+                },
+                "originalAuthor": {
+                    "name": "originalAuthor",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -172,6 +185,12 @@ export const schema = {
                             {
                                 "allow": "public",
                                 "operations": [
+                                    "read"
+                                ]
+                            },
+                            {
+                                "allow": "private",
+                                "operations": [
                                     "create",
                                     "update",
                                     "delete",
@@ -186,5 +205,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "be47366db867c7a076cfaa074f0c46d8"
+    "version": "08a1ee18af52292600288edd0a4207f4"
 };
