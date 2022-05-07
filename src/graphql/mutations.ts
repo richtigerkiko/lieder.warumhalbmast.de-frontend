@@ -9,12 +9,11 @@ export const createVerse = /* GraphQL */ `
   ) {
     createVerse(input: $input, condition: $condition) {
       id
-      songID
       position
       text
-      editor
       editorJSID
       editorJSType
+      songID
       createdAt
       updatedAt
       _version
@@ -30,12 +29,11 @@ export const updateVerse = /* GraphQL */ `
   ) {
     updateVerse(input: $input, condition: $condition) {
       id
-      songID
       position
       text
-      editor
       editorJSID
       editorJSType
+      songID
       createdAt
       updatedAt
       _version
@@ -51,12 +49,11 @@ export const deleteVerse = /* GraphQL */ `
   ) {
     deleteVerse(input: $input, condition: $condition) {
       id
-      songID
       position
       text
-      editor
       editorJSID
       editorJSType
+      songID
       createdAt
       updatedAt
       _version
@@ -73,12 +70,12 @@ export const createSong = /* GraphQL */ `
     createSong(input: $input, condition: $condition) {
       id
       title
-      editor
+      artist
+      lastAuthor
       Verses {
         nextToken
         startedAt
       }
-      originalAuthor
       createdAt
       updatedAt
       _version
@@ -95,12 +92,12 @@ export const updateSong = /* GraphQL */ `
     updateSong(input: $input, condition: $condition) {
       id
       title
-      editor
+      artist
+      lastAuthor
       Verses {
         nextToken
         startedAt
       }
-      originalAuthor
       createdAt
       updatedAt
       _version
@@ -117,12 +114,12 @@ export const deleteSong = /* GraphQL */ `
     deleteSong(input: $input, condition: $condition) {
       id
       title
-      editor
+      artist
+      lastAuthor
       Verses {
         nextToken
         startedAt
       }
-      originalAuthor
       createdAt
       updatedAt
       _version

@@ -8,8 +8,8 @@
           <input type="text" class="form-control " placeholder="Künstler" v-model="editSong.artist" />
         </div>
         <div v-else>
-        <p><span class="h1">{{ song.title }}</span> <span>von {{song.originalAuthor}}</span></p>
-        <p><small>Last update on {{ song.updatedAt?.substring(0, 10) }} by {{ song.editor }}</small></p>
+        <p><span class="h1">{{ song.title }}</span> <span>von {{song.artist}}</span></p>
+        <p><small>Last update on {{ song.updatedAt?.substring(0, 10) }} by {{ song.lastAuthor }}</small></p>
         </div>
       </div>
     </div>
@@ -40,7 +40,7 @@ const editSong = ref({
   artist: ""
 })
 
-const song = ref(new Song({title:""}))
+const song = ref(new Song({title:"", lastAuthor: userStore().displayName}))
 
 const verses = ref([] as Verse[])
 
@@ -58,13 +58,13 @@ async function SaveSong() {
   if (isNewSong.value) {
     song.value = new Song({
       title: editSong.value.songTitle,
-      editor: userStore().displayName,
-      originalAuthor: editSong.value.artist
+      lastAuthor: userStore().displayName,
+      artist: editSong.value.artist
     })
   }
   const s = await DataStore.save(Song.copyOf(song.value, updateSong => {
     updateSong.title = editSong.value.songTitle,
-    updateSong.originalAuthor = editSong.value.artist
+    updateSong.artist = editSong.value.artist
   }))
   const newverses:Verse[] = convertEditorJsBlocksToApiVerse(data!.blocks, s.id);
   await DataStore.delete(Verse, todelete => todelete.songID('eq', s.id))
@@ -91,6 +91,7 @@ async function getPageData() {
     song.value = searchedSong
     isEditing.value = false
     editSong.value.songTitle = song.value.title!
+    editSong.value.artist = song.value.artist || ""
   }
   verses.value = (await DataStore.query(Verse))
     .filter((v) => v.songID === song.value.id)
@@ -114,3 +115,7 @@ async function deleteSong() {
   router.push('/')
 }
 </script>
+<style>
+.ce-block__content, .ce-toolbar__content { max-width:calc(100% - 80px) !important; } .cdx-block { max-width: 100% !important; }
+
+</style>

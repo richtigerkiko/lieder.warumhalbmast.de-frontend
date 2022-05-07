@@ -1,18 +1,16 @@
-type Verse @model @auth(rules: [{allow: public, operations: [read]}, {allow: private}]) {
+type Verse @model @auth(rules: [{allow: public}]) {
   id: ID!
-  songID: ID! @index(name: "bySong")
   position: Int
   text: String
-  editor: String
   editorJSID: String
   editorJSType: String
+  songID: ID! @index(name: "bySong")
 }
 
-type Song @model @auth(rules: [{allow: public, operations: [read]}, {allow: private}]) {
+type Song @model @auth(rules: [{allow: public}]) {
   id: ID!
   title: String!
-  editor: String
+  artist: String
+  lastAuthor: String!
   Verses: [Verse] @hasMany(indexName: "bySong", fields: ["id"])
-  originalAuthor: String
-}
- 
+} 

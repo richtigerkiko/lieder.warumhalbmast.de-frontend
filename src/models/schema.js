@@ -10,13 +10,6 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "songID": {
-                    "name": "songID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
                 "position": {
                     "name": "position",
                     "isArray": false,
@@ -26,13 +19,6 @@ export const schema = {
                 },
                 "text": {
                     "name": "text",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "editor": {
-                    "name": "editor",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -50,6 +36,13 @@ export const schema = {
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
+                    "attributes": []
+                },
+                "songID": {
+                    "name": "songID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
                     "attributes": []
                 },
                 "createdAt": {
@@ -92,12 +85,6 @@ export const schema = {
                             {
                                 "allow": "public",
                                 "operations": [
-                                    "read"
-                                ]
-                            },
-                            {
-                                "allow": "private",
-                                "operations": [
                                     "create",
                                     "update",
                                     "delete",
@@ -126,11 +113,18 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "editor": {
-                    "name": "editor",
+                "artist": {
+                    "name": "artist",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
+                    "attributes": []
+                },
+                "lastAuthor": {
+                    "name": "lastAuthor",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
                     "attributes": []
                 },
                 "Verses": {
@@ -146,13 +140,6 @@ export const schema = {
                         "connectionType": "HAS_MANY",
                         "associatedWith": "songID"
                     }
-                },
-                "originalAuthor": {
-                    "name": "originalAuthor",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -185,12 +172,6 @@ export const schema = {
                             {
                                 "allow": "public",
                                 "operations": [
-                                    "read"
-                                ]
-                            },
-                            {
-                                "allow": "private",
-                                "operations": [
                                     "create",
                                     "update",
                                     "delete",
@@ -205,5 +186,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "08a1ee18af52292600288edd0a4207f4"
+    "version": "6e68e5c5c76c980984bb1b5fd2a5952b"
 };

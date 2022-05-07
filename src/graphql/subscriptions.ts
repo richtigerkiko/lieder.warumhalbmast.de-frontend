@@ -6,12 +6,11 @@ export const onCreateVerse = /* GraphQL */ `
   subscription OnCreateVerse {
     onCreateVerse {
       id
-      songID
       position
       text
-      editor
       editorJSID
       editorJSType
+      songID
       createdAt
       updatedAt
       _version
@@ -24,12 +23,11 @@ export const onUpdateVerse = /* GraphQL */ `
   subscription OnUpdateVerse {
     onUpdateVerse {
       id
-      songID
       position
       text
-      editor
       editorJSID
       editorJSType
+      songID
       createdAt
       updatedAt
       _version
@@ -42,12 +40,11 @@ export const onDeleteVerse = /* GraphQL */ `
   subscription OnDeleteVerse {
     onDeleteVerse {
       id
-      songID
       position
       text
-      editor
       editorJSID
       editorJSType
+      songID
       createdAt
       updatedAt
       _version
@@ -61,12 +58,12 @@ export const onCreateSong = /* GraphQL */ `
     onCreateSong {
       id
       title
-      editor
+      artist
+      lastAuthor
       Verses {
         nextToken
         startedAt
       }
-      originalAuthor
       createdAt
       updatedAt
       _version
@@ -80,12 +77,12 @@ export const onUpdateSong = /* GraphQL */ `
     onUpdateSong {
       id
       title
-      editor
+      artist
+      lastAuthor
       Verses {
         nextToken
         startedAt
       }
-      originalAuthor
       createdAt
       updatedAt
       _version
@@ -99,12 +96,12 @@ export const onDeleteSong = /* GraphQL */ `
     onDeleteSong {
       id
       title
-      editor
+      artist
+      lastAuthor
       Verses {
         nextToken
         startedAt
       }
-      originalAuthor
       createdAt
       updatedAt
       _version

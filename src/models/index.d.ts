@@ -14,12 +14,11 @@ type SongMetaData = {
 
 export declare class Verse {
   readonly id: string;
-  readonly songID: string;
   readonly position?: number | null;
   readonly text?: string | null;
-  readonly editor?: string | null;
   readonly editorJSID?: string | null;
   readonly editorJSType?: string | null;
+  readonly songID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Verse, VerseMetaData>);
@@ -29,9 +28,9 @@ export declare class Verse {
 export declare class Song {
   readonly id: string;
   readonly title: string;
-  readonly editor?: string | null;
+  readonly artist?: string | null;
+  readonly lastAuthor: string;
   readonly Verses?: (Verse | null)[] | null;
-  readonly originalAuthor?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Song, SongMetaData>);

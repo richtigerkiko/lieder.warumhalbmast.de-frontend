@@ -6,12 +6,11 @@ export const getVerse = /* GraphQL */ `
   query GetVerse($id: ID!) {
     getVerse(id: $id) {
       id
-      songID
       position
       text
-      editor
       editorJSID
       editorJSType
+      songID
       createdAt
       updatedAt
       _version
@@ -29,12 +28,11 @@ export const listVerses = /* GraphQL */ `
     listVerses(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        songID
         position
         text
-        editor
         editorJSID
         editorJSType
+        songID
         createdAt
         updatedAt
         _version
@@ -61,12 +59,11 @@ export const syncVerses = /* GraphQL */ `
     ) {
       items {
         id
-        songID
         position
         text
-        editor
         editorJSID
         editorJSType
+        songID
         createdAt
         updatedAt
         _version
@@ -83,12 +80,12 @@ export const getSong = /* GraphQL */ `
     getSong(id: $id) {
       id
       title
-      editor
+      artist
+      lastAuthor
       Verses {
         nextToken
         startedAt
       }
-      originalAuthor
       createdAt
       updatedAt
       _version
@@ -107,8 +104,8 @@ export const listSongs = /* GraphQL */ `
       items {
         id
         title
-        editor
-        originalAuthor
+        artist
+        lastAuthor
         createdAt
         updatedAt
         _version
@@ -136,8 +133,8 @@ export const syncSongs = /* GraphQL */ `
       items {
         id
         title
-        editor
-        originalAuthor
+        artist
+        lastAuthor
         createdAt
         updatedAt
         _version

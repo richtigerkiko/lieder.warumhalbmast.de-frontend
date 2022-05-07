@@ -4,25 +4,75 @@
 
 export type CreateVerseInput = {
   id?: string | null,
-  songID: string,
   position?: number | null,
   text?: string | null,
-  editor?: string | null,
   editorJSID?: string | null,
   editorJSType?: string | null,
+  songID: string,
   _version?: number | null,
 };
 
 export type ModelVerseConditionInput = {
-  songID?: ModelIDInput | null,
   position?: ModelIntInput | null,
   text?: ModelStringInput | null,
-  editor?: ModelStringInput | null,
   editorJSID?: ModelStringInput | null,
   editorJSType?: ModelStringInput | null,
+  songID?: ModelIDInput | null,
   and?: Array< ModelVerseConditionInput | null > | null,
   or?: Array< ModelVerseConditionInput | null > | null,
   not?: ModelVerseConditionInput | null,
+};
+
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export enum ModelAttributeTypes {
+  binary = "binary",
+  binarySet = "binarySet",
+  bool = "bool",
+  list = "list",
+  map = "map",
+  number = "number",
+  numberSet = "numberSet",
+  string = "string",
+  stringSet = "stringSet",
+  _null = "_null",
+}
+
+
+export type ModelStringInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
+};
+
+export type ModelSizeInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
 };
 
 export type ModelIDInput = {
@@ -41,67 +91,14 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export enum ModelAttributeTypes {
-  binary = "binary",
-  binarySet = "binarySet",
-  bool = "bool",
-  list = "list",
-  map = "map",
-  number = "number",
-  numberSet = "numberSet",
-  string = "string",
-  stringSet = "stringSet",
-  _null = "_null",
-}
-
-
-export type ModelSizeInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-};
-
-export type ModelIntInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-};
-
-export type ModelStringInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
-};
-
 export type Verse = {
   __typename: "Verse",
   id: string,
-  songID: string,
   position?: number | null,
   text?: string | null,
-  editor?: string | null,
   editorJSID?: string | null,
   editorJSType?: string | null,
+  songID: string,
   createdAt: string,
   updatedAt: string,
   _version: number,
@@ -111,12 +108,11 @@ export type Verse = {
 
 export type UpdateVerseInput = {
   id: string,
-  songID?: string | null,
   position?: number | null,
   text?: string | null,
-  editor?: string | null,
   editorJSID?: string | null,
   editorJSType?: string | null,
+  songID?: string | null,
   _version?: number | null,
 };
 
@@ -127,14 +123,16 @@ export type DeleteVerseInput = {
 
 export type CreateSongInput = {
   id?: string | null,
-  songname?: string | null,
-  editor?: string | null,
+  title: string,
+  artist?: string | null,
+  lastAuthor: string,
   _version?: number | null,
 };
 
 export type ModelSongConditionInput = {
-  songname?: ModelStringInput | null,
-  editor?: ModelStringInput | null,
+  title?: ModelStringInput | null,
+  artist?: ModelStringInput | null,
+  lastAuthor?: ModelStringInput | null,
   and?: Array< ModelSongConditionInput | null > | null,
   or?: Array< ModelSongConditionInput | null > | null,
   not?: ModelSongConditionInput | null,
@@ -143,8 +141,9 @@ export type ModelSongConditionInput = {
 export type Song = {
   __typename: "Song",
   id: string,
-  songname?: string | null,
-  editor?: string | null,
+  title: string,
+  artist?: string | null,
+  lastAuthor: string,
   Verses?: ModelVerseConnection | null,
   createdAt: string,
   updatedAt: string,
@@ -162,8 +161,9 @@ export type ModelVerseConnection = {
 
 export type UpdateSongInput = {
   id: string,
-  songname?: string | null,
-  editor?: string | null,
+  title?: string | null,
+  artist?: string | null,
+  lastAuthor?: string | null,
   _version?: number | null,
 };
 
@@ -174,12 +174,11 @@ export type DeleteSongInput = {
 
 export type ModelVerseFilterInput = {
   id?: ModelIDInput | null,
-  songID?: ModelIDInput | null,
   position?: ModelIntInput | null,
   text?: ModelStringInput | null,
-  editor?: ModelStringInput | null,
   editorJSID?: ModelStringInput | null,
   editorJSType?: ModelStringInput | null,
+  songID?: ModelIDInput | null,
   and?: Array< ModelVerseFilterInput | null > | null,
   or?: Array< ModelVerseFilterInput | null > | null,
   not?: ModelVerseFilterInput | null,
@@ -187,8 +186,9 @@ export type ModelVerseFilterInput = {
 
 export type ModelSongFilterInput = {
   id?: ModelIDInput | null,
-  songname?: ModelStringInput | null,
-  editor?: ModelStringInput | null,
+  title?: ModelStringInput | null,
+  artist?: ModelStringInput | null,
+  lastAuthor?: ModelStringInput | null,
   and?: Array< ModelSongFilterInput | null > | null,
   or?: Array< ModelSongFilterInput | null > | null,
   not?: ModelSongFilterInput | null,
@@ -210,12 +210,11 @@ export type CreateVerseMutation = {
   createVerse?:  {
     __typename: "Verse",
     id: string,
-    songID: string,
     position?: number | null,
     text?: string | null,
-    editor?: string | null,
     editorJSID?: string | null,
     editorJSType?: string | null,
+    songID: string,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -233,12 +232,11 @@ export type UpdateVerseMutation = {
   updateVerse?:  {
     __typename: "Verse",
     id: string,
-    songID: string,
     position?: number | null,
     text?: string | null,
-    editor?: string | null,
     editorJSID?: string | null,
     editorJSType?: string | null,
+    songID: string,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -256,12 +254,11 @@ export type DeleteVerseMutation = {
   deleteVerse?:  {
     __typename: "Verse",
     id: string,
-    songID: string,
     position?: number | null,
     text?: string | null,
-    editor?: string | null,
     editorJSID?: string | null,
     editorJSType?: string | null,
+    songID: string,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -279,8 +276,9 @@ export type CreateSongMutation = {
   createSong?:  {
     __typename: "Song",
     id: string,
-    songname?: string | null,
-    editor?: string | null,
+    title: string,
+    artist?: string | null,
+    lastAuthor: string,
     Verses?:  {
       __typename: "ModelVerseConnection",
       nextToken?: string | null,
@@ -303,8 +301,9 @@ export type UpdateSongMutation = {
   updateSong?:  {
     __typename: "Song",
     id: string,
-    songname?: string | null,
-    editor?: string | null,
+    title: string,
+    artist?: string | null,
+    lastAuthor: string,
     Verses?:  {
       __typename: "ModelVerseConnection",
       nextToken?: string | null,
@@ -327,8 +326,9 @@ export type DeleteSongMutation = {
   deleteSong?:  {
     __typename: "Song",
     id: string,
-    songname?: string | null,
-    editor?: string | null,
+    title: string,
+    artist?: string | null,
+    lastAuthor: string,
     Verses?:  {
       __typename: "ModelVerseConnection",
       nextToken?: string | null,
@@ -350,12 +350,11 @@ export type GetVerseQuery = {
   getVerse?:  {
     __typename: "Verse",
     id: string,
-    songID: string,
     position?: number | null,
     text?: string | null,
-    editor?: string | null,
     editorJSID?: string | null,
     editorJSType?: string | null,
+    songID: string,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -376,12 +375,11 @@ export type ListVersesQuery = {
     items:  Array< {
       __typename: "Verse",
       id: string,
-      songID: string,
       position?: number | null,
       text?: string | null,
-      editor?: string | null,
       editorJSID?: string | null,
       editorJSType?: string | null,
+      songID: string,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -406,12 +404,11 @@ export type SyncVersesQuery = {
     items:  Array< {
       __typename: "Verse",
       id: string,
-      songID: string,
       position?: number | null,
       text?: string | null,
-      editor?: string | null,
       editorJSID?: string | null,
       editorJSType?: string | null,
+      songID: string,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -431,8 +428,9 @@ export type GetSongQuery = {
   getSong?:  {
     __typename: "Song",
     id: string,
-    songname?: string | null,
-    editor?: string | null,
+    title: string,
+    artist?: string | null,
+    lastAuthor: string,
     Verses?:  {
       __typename: "ModelVerseConnection",
       nextToken?: string | null,
@@ -458,8 +456,9 @@ export type ListSongsQuery = {
     items:  Array< {
       __typename: "Song",
       id: string,
-      songname?: string | null,
-      editor?: string | null,
+      title: string,
+      artist?: string | null,
+      lastAuthor: string,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -484,8 +483,9 @@ export type SyncSongsQuery = {
     items:  Array< {
       __typename: "Song",
       id: string,
-      songname?: string | null,
-      editor?: string | null,
+      title: string,
+      artist?: string | null,
+      lastAuthor: string,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -501,12 +501,11 @@ export type OnCreateVerseSubscription = {
   onCreateVerse?:  {
     __typename: "Verse",
     id: string,
-    songID: string,
     position?: number | null,
     text?: string | null,
-    editor?: string | null,
     editorJSID?: string | null,
     editorJSType?: string | null,
+    songID: string,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -519,12 +518,11 @@ export type OnUpdateVerseSubscription = {
   onUpdateVerse?:  {
     __typename: "Verse",
     id: string,
-    songID: string,
     position?: number | null,
     text?: string | null,
-    editor?: string | null,
     editorJSID?: string | null,
     editorJSType?: string | null,
+    songID: string,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -537,12 +535,11 @@ export type OnDeleteVerseSubscription = {
   onDeleteVerse?:  {
     __typename: "Verse",
     id: string,
-    songID: string,
     position?: number | null,
     text?: string | null,
-    editor?: string | null,
     editorJSID?: string | null,
     editorJSType?: string | null,
+    songID: string,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -555,8 +552,9 @@ export type OnCreateSongSubscription = {
   onCreateSong?:  {
     __typename: "Song",
     id: string,
-    songname?: string | null,
-    editor?: string | null,
+    title: string,
+    artist?: string | null,
+    lastAuthor: string,
     Verses?:  {
       __typename: "ModelVerseConnection",
       nextToken?: string | null,
@@ -574,8 +572,9 @@ export type OnUpdateSongSubscription = {
   onUpdateSong?:  {
     __typename: "Song",
     id: string,
-    songname?: string | null,
-    editor?: string | null,
+    title: string,
+    artist?: string | null,
+    lastAuthor: string,
     Verses?:  {
       __typename: "ModelVerseConnection",
       nextToken?: string | null,
@@ -593,8 +592,9 @@ export type OnDeleteSongSubscription = {
   onDeleteSong?:  {
     __typename: "Song",
     id: string,
-    songname?: string | null,
-    editor?: string | null,
+    title: string,
+    artist?: string | null,
+    lastAuthor: string,
     Verses?:  {
       __typename: "ModelVerseConnection",
       nextToken?: string | null,
