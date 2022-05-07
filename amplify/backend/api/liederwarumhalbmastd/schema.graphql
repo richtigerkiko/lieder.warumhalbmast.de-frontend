@@ -1,3 +1,18 @@
+type VerseObj {
+  editorJSID: String!
+  editorJSType: String!
+  text: String
+  position: String!
+}
+
+type SongAndVerse @model @auth(rules: [{allow: private, provider: iam}]) {
+  id: ID!
+  title: String!
+  artist: String
+  lastAuthor: String!
+  Verses: [VerseObj!]
+}
+
 type Verse @model @auth(rules: [{allow: public}]) {
   id: ID!
   position: Int
@@ -10,7 +25,8 @@ type Verse @model @auth(rules: [{allow: public}]) {
 type Song @model @auth(rules: [{allow: public}]) {
   id: ID!
   title: String!
-  artist: String
   lastAuthor: String!
+  artist: String
   Verses: [Verse] @hasMany(indexName: "bySong", fields: ["id"])
-} 
+}
+ 

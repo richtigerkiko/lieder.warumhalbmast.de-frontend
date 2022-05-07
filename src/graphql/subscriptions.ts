@@ -2,6 +2,69 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateSongAndVerse = /* GraphQL */ `
+  subscription OnCreateSongAndVerse {
+    onCreateSongAndVerse {
+      id
+      title
+      artist
+      lastAuthor
+      Verses {
+        editorJSID
+        editorJSType
+        text
+        position
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateSongAndVerse = /* GraphQL */ `
+  subscription OnUpdateSongAndVerse {
+    onUpdateSongAndVerse {
+      id
+      title
+      artist
+      lastAuthor
+      Verses {
+        editorJSID
+        editorJSType
+        text
+        position
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteSongAndVerse = /* GraphQL */ `
+  subscription OnDeleteSongAndVerse {
+    onDeleteSongAndVerse {
+      id
+      title
+      artist
+      lastAuthor
+      Verses {
+        editorJSID
+        editorJSType
+        text
+        position
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
 export const onCreateVerse = /* GraphQL */ `
   subscription OnCreateVerse {
     onCreateVerse {
@@ -58,8 +121,8 @@ export const onCreateSong = /* GraphQL */ `
     onCreateSong {
       id
       title
-      artist
       lastAuthor
+      artist
       Verses {
         nextToken
         startedAt
@@ -77,8 +140,8 @@ export const onUpdateSong = /* GraphQL */ `
     onUpdateSong {
       id
       title
-      artist
       lastAuthor
+      artist
       Verses {
         nextToken
         startedAt
@@ -96,8 +159,8 @@ export const onDeleteSong = /* GraphQL */ `
     onDeleteSong {
       id
       title
-      artist
       lastAuthor
+      artist
       Verses {
         nextToken
         startedAt

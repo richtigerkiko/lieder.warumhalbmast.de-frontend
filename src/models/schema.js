@@ -1,5 +1,89 @@
 export const schema = {
     "models": {
+        "SongAndVerse": {
+            "name": "SongAndVerse",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "title": {
+                    "name": "title",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "artist": {
+                    "name": "artist",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "lastAuthor": {
+                    "name": "lastAuthor",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "Verses": {
+                    "name": "Verses",
+                    "isArray": true,
+                    "type": {
+                        "nonModel": "VerseObj"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "SongAndVerses",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "private",
+                                "provider": "iam",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "Verse": {
             "name": "Verse",
             "fields": {
@@ -113,18 +197,18 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "artist": {
-                    "name": "artist",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
                 "lastAuthor": {
                     "name": "lastAuthor",
                     "isArray": false,
                     "type": "String",
                     "isRequired": true,
+                    "attributes": []
+                },
+                "artist": {
+                    "name": "artist",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
                     "attributes": []
                 },
                 "Verses": {
@@ -185,6 +269,40 @@ export const schema = {
         }
     },
     "enums": {},
-    "nonModels": {},
-    "version": "6e68e5c5c76c980984bb1b5fd2a5952b"
+    "nonModels": {
+        "VerseObj": {
+            "name": "VerseObj",
+            "fields": {
+                "editorJSID": {
+                    "name": "editorJSID",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "editorJSType": {
+                    "name": "editorJSType",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "text": {
+                    "name": "text",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "position": {
+                    "name": "position",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                }
+            }
+        }
+    },
+    "version": "d189fc479fccfbc3a98576cba964881e"
 };

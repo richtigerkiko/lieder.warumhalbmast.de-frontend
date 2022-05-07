@@ -2,5 +2,5 @@
   "AppSyncApiName": "liederwarumhalbmastd",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false,
-  "AuthModeLastUpdated": "2022-05-07T21:08:17.218Z"
+  "AuthModeLastUpdated": "2022-05-07T21:52:30.293Z"
 }

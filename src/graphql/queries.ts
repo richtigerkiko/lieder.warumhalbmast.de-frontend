@@ -2,6 +2,79 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getSongAndVerse = /* GraphQL */ `
+  query GetSongAndVerse($id: ID!) {
+    getSongAndVerse(id: $id) {
+      id
+      title
+      artist
+      lastAuthor
+      Verses {
+        editorJSID
+        editorJSType
+        text
+        position
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listSongAndVerses = /* GraphQL */ `
+  query ListSongAndVerses(
+    $filter: ModelSongAndVerseFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSongAndVerses(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        artist
+        lastAuthor
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncSongAndVerses = /* GraphQL */ `
+  query SyncSongAndVerses(
+    $filter: ModelSongAndVerseFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncSongAndVerses(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        title
+        artist
+        lastAuthor
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const getVerse = /* GraphQL */ `
   query GetVerse($id: ID!) {
     getVerse(id: $id) {
@@ -80,8 +153,8 @@ export const getSong = /* GraphQL */ `
     getSong(id: $id) {
       id
       title
-      artist
       lastAuthor
+      artist
       Verses {
         nextToken
         startedAt
@@ -104,8 +177,8 @@ export const listSongs = /* GraphQL */ `
       items {
         id
         title
-        artist
         lastAuthor
+        artist
         createdAt
         updatedAt
         _version
@@ -133,8 +206,8 @@ export const syncSongs = /* GraphQL */ `
       items {
         id
         title
-        artist
         lastAuthor
+        artist
         createdAt
         updatedAt
         _version

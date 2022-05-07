@@ -3,16 +3,15 @@
   "serviceConfiguration": {
     "apiName": "liederwarumhalbmastd",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "D:\\dev\\lieder.warumhalbmast.de\\frontend\\lieder.warumhalbmast.de\\amplify\\backend\\api\\liederwarumhalbmastd\\schema.graphql",
+    "gqlSchemaPath": "/tmp/amplify-15cfdacb-4675-4da3-8c15-20077da8e509/amplify/backend/api/liederwarumhalbmastd/schema.graphql",
     "defaultAuthType": {
       "mode": "AWS_IAM"
     },
     "additionalAuthTypes": [
       {
         "mode": "API_KEY",
-        "expirationTime": 30,
-        "apiKeyExpirationDate": "2022-06-06T21:08:16.133Z",
-        "keyDescription": "dev"
+        "keyDescription": "api key description",
+        "expirationTime": 30
       }
     ],
     "conflictResolution": {

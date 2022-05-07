@@ -2,6 +2,78 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createSongAndVerse = /* GraphQL */ `
+  mutation CreateSongAndVerse(
+    $input: CreateSongAndVerseInput!
+    $condition: ModelSongAndVerseConditionInput
+  ) {
+    createSongAndVerse(input: $input, condition: $condition) {
+      id
+      title
+      artist
+      lastAuthor
+      Verses {
+        editorJSID
+        editorJSType
+        text
+        position
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const updateSongAndVerse = /* GraphQL */ `
+  mutation UpdateSongAndVerse(
+    $input: UpdateSongAndVerseInput!
+    $condition: ModelSongAndVerseConditionInput
+  ) {
+    updateSongAndVerse(input: $input, condition: $condition) {
+      id
+      title
+      artist
+      lastAuthor
+      Verses {
+        editorJSID
+        editorJSType
+        text
+        position
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const deleteSongAndVerse = /* GraphQL */ `
+  mutation DeleteSongAndVerse(
+    $input: DeleteSongAndVerseInput!
+    $condition: ModelSongAndVerseConditionInput
+  ) {
+    deleteSongAndVerse(input: $input, condition: $condition) {
+      id
+      title
+      artist
+      lastAuthor
+      Verses {
+        editorJSID
+        editorJSType
+        text
+        position
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
 export const createVerse = /* GraphQL */ `
   mutation CreateVerse(
     $input: CreateVerseInput!
@@ -70,8 +142,8 @@ export const createSong = /* GraphQL */ `
     createSong(input: $input, condition: $condition) {
       id
       title
-      artist
       lastAuthor
+      artist
       Verses {
         nextToken
         startedAt
@@ -92,8 +164,8 @@ export const updateSong = /* GraphQL */ `
     updateSong(input: $input, condition: $condition) {
       id
       title
-      artist
       lastAuthor
+      artist
       Verses {
         nextToken
         startedAt
@@ -114,8 +186,8 @@ export const deleteSong = /* GraphQL */ `
     deleteSong(input: $input, condition: $condition) {
       id
       title
-      artist
       lastAuthor
+      artist
       Verses {
         nextToken
         startedAt
