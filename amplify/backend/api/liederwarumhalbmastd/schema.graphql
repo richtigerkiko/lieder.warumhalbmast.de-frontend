@@ -1,4 +1,4 @@
-type Verse @model @auth(rules: [{allow: public}]) {
+type Verse @model @auth(rules: [{allow: public, operations: [read]}, {allow: private}]) {
   id: ID!
   songID: ID! @index(name: "bySong")
   position: Int
@@ -8,9 +8,11 @@ type Verse @model @auth(rules: [{allow: public}]) {
   editorJSType: String
 }
 
-type Song @model @auth(rules: [{allow: public}]) {
+type Song @model @auth(rules: [{allow: public, operations: [read]}, {allow: private}]) {
   id: ID!
-  songname: String
+  title: String!
   editor: String
   Verses: [Verse] @hasMany(indexName: "bySong", fields: ["id"])
-} 
+  originalAuthor: String
+}
+ 

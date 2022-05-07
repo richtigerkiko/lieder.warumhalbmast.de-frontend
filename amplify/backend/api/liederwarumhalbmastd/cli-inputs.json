@@ -3,7 +3,7 @@
   "serviceConfiguration": {
     "apiName": "liederwarumhalbmastd",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/tmp/amplify-5c523fb3-5ab5-41eb-8fd0-10d37e956be0/amplify/backend/api/liederwarumhalbmastd/schema.graphql",
+    "gqlSchemaPath": "/tmp/amplify-5da63087-9a33-4be8-83c5-09586474c756/amplify/backend/api/liederwarumhalbmastd/schema.graphql",
     "defaultAuthType": {
       "mode": "API_KEY",
       "keyDescription": "api key description",
@@ -12,6 +12,10 @@
     "additionalAuthTypes": [
       {
         "mode": "AWS_IAM"
+      },
+      {
+        "mode": "AMAZON_COGNITO_USER_POOLS",
+        "cognitoUserPoolId": "authliederwarumhalbmastd"
       }
     ],
     "conflictResolution": {

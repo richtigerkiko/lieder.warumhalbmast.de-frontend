@@ -28,9 +28,10 @@ export declare class Verse {
 
 export declare class Song {
   readonly id: string;
-  readonly songname?: string | null;
+  readonly title: string;
   readonly editor?: string | null;
   readonly Verses?: (Verse | null)[] | null;
+  readonly originalAuthor?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Song, SongMetaData>);
