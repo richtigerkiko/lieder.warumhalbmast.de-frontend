@@ -1,27 +1,26 @@
 <template>
   <main class="container">
-    <songNav @toggleEdit="ToggleEditSong" :editing="isEditing" />
+    <songNav @toggleEdit="ToggleEditSong" @deleteSong="deleteSong" :editing="isEditing" :isNewSong="isNewSong"/>
     <div class="row">
       <div class="col">
         <div class="my-5" v-if="isEditing">
-          <input type="text" class="form-control" placeholder="SongTitle" v-model="test.songname"/>
+          <input type="text" class="form-control" placeholder="SongTitle" v-model="editSong.songTitle"/>
         </div>
         <h1 v-else class="mt-2">{{ song.songname }}</h1>
       </div>
     </div>
     <div class="row">
       <div class="col" ref="editor"></div>
-    </div>  
+    </div>
   </main>
 </template>
 <script setup lang="ts">
 import songNav from "@/components/navigation/songNav.vue";
-import { computed, onMounted, ref  } from "vue";
+import { onMounted, ref  } from "vue";
 import EditorJS from "@editorjs/editorjs";
 import { useRoute, useRouter } from "vue-router";
 import { userStore } from "@/stores/userStore";
 import { DataStore } from "aws-amplify";
-// import { Song, Verse } from "@/models";
 import { convertApiVerseToEditorJsBlocks, convertEditorJsBlocksToApiVerse } from "@/helper/converts";
 import { Song, Verse } from "@/models";
 
@@ -29,19 +28,14 @@ const editor = ref(null);
 let edit: EditorJS | null = null;
 const router = useRouter()
 
-const isNewSong = ref(true)
+const isNewSong = ref(false)
 
-// const writableSongTilte = ref("Dödel Song Title")
-
-const song = ref(new Song({
-  songname: "Dödel Song Title",
+const editSong = ref({
+  songTitle: "",
   editor: userStore().displayName
-}))
-
-const test = ref({
-  songname: "asd",
-  test2: 0
 })
+
+const song = ref(new Song({}))
 
 const verses = ref([] as Verse[])
 
@@ -54,11 +48,19 @@ onMounted(() => {
   getPageData();
 });
 
-
-
 async function SaveSong() {
   const data = await edit?.save()
-  const s = await DataStore.save(song.value)
+  if(isNewSong){
+    song.value = new Song({
+      songname: editSong.value.songTitle,
+      editor: userStore().displayName
+    })
+  }
+  const s = await DataStore.save(Song.copyOf(song.value, updateSong => {
+    updateSong.songname = editSong.value.songTitle
+    updateSong.editor = editSong.value.editor
+  }))
+
   const newverses = convertEditorJsBlocksToApiVerse(data!.blocks, s.id);
   verses.value.forEach((v) => DataStore.delete(Verse, todelete => todelete.id("eq", v.id)));
   newverses.forEach((v) => DataStore.save(v));
@@ -74,11 +76,13 @@ function ToggleEditSong() {
   edit?.readOnly.toggle();
 }
 
+
 async function getPageData() {
   const searchedSong = await DataStore.query(Song, useRoute().params.id as string)
   if(searchedSong){
     song.value = searchedSong
     isEditing.value = false
+    editSong.value.songTitle = song.value.songname!
   } 
   verses.value = (await DataStore.query(Verse))
     .filter((v) => v.songID === song.value.id)
@@ -94,8 +98,11 @@ function initEditorJs() {
     data:{
       blocks: convertApiVerseToEditorJsBlocks(verses.value)
     }
-  });
+  })
 }
 
-
+async function deleteSong(){
+  await DataStore.delete(song.value)
+  router.push('/')
+}
 </script>
