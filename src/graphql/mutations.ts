@@ -72,12 +72,13 @@ export const createSong = /* GraphQL */ `
   ) {
     createSong(input: $input, condition: $condition) {
       id
-      songname
+      title
       editor
       Verses {
         nextToken
         startedAt
       }
+      originalAuthor
       createdAt
       updatedAt
       _version
@@ -93,12 +94,13 @@ export const updateSong = /* GraphQL */ `
   ) {
     updateSong(input: $input, condition: $condition) {
       id
-      songname
+      title
       editor
       Verses {
         nextToken
         startedAt
       }
+      originalAuthor
       createdAt
       updatedAt
       _version
@@ -114,12 +116,13 @@ export const deleteSong = /* GraphQL */ `
   ) {
     deleteSong(input: $input, condition: $condition) {
       id
-      songname
+      title
       editor
       Verses {
         nextToken
         startedAt
       }
+      originalAuthor
       createdAt
       updatedAt
       _version

@@ -40,10 +40,10 @@ export function convertSongsToAlphabetArray(song:Song[]){
     alphabet.forEach(letter => {
         let songs = new Array<Song>()
         if(letter === "#"){
-            songs = song.filter(x => !alphabet.some(char => x.songname?.charAt(0).toUpperCase() === char.toUpperCase())).sort((a,b) => a.songname!.localeCompare(b.songname!))
+            songs = song.filter(x => !alphabet.some(char => x.title?.charAt(0).toUpperCase() === char.toUpperCase())).sort((a,b) => a.title!.localeCompare(b.title!))
         }
         else{
-            songs = song.filter(x => x.songname?.charAt(0).toUpperCase() === letter).sort((a,b) => a.songname!.localeCompare(b.songname!))
+            songs = song.filter(x => x.title?.charAt(0).toUpperCase() === letter).sort((a,b) => a.title!.localeCompare(b.title!))
         }
         alphabetArray.push({
             letter: letter,

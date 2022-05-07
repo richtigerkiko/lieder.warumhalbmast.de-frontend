@@ -11,7 +11,7 @@
         <h4 class="my-3">{{ letter.letter }}</h4>
         <ul v-for="song in letter.songs" class="list-group">
           <li class="list-group-item">
-            <router-link :to="'/song/' + song.id">{{ song.songname }}</router-link>
+            <router-link :to="'/song/' + song.id">{{ song.title }}</router-link>
           </li>
         </ul>
       </div>

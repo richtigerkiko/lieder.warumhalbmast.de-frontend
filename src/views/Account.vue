@@ -6,7 +6,7 @@
         <main class="form-signin">
             <authenticator :login-mechanisms="['email']">
                 <template v-slot="{ user, signOut }">
-                <h1>Hello {{ user.givenname }}!</h1>
+                <h1>Hello {{ user.given_name }}!</h1>
                 <button @click="signOut">Sign Out</button>
                 </template>
             </authenticator>

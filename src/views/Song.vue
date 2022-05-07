@@ -7,7 +7,7 @@
           <input type="text" class="form-control form-control-lg" placeholder="SongTitle"
             v-model="editSong.songTitle" />
         </div>
-        <h1 v-else>{{ song.songname }}</h1>
+        <h1 v-else>{{ song.title }}</h1>
         <p><small>Last update on {{ song.updatedAt?.substring(0, 10) }} by {{ song.editor }}</small></p>
       </div>
     </div>
@@ -54,12 +54,12 @@ async function SaveSong() {
   const data = await edit?.save()
   if (isNewSong.value) {
     song.value = new Song({
-      songname: editSong.value.songTitle,
+      title: editSong.value.songTitle,
       editor: userStore().displayName
     })
   }
   const s = await DataStore.save(Song.copyOf(song.value, updateSong => {
-    updateSong.songname = editSong.value.songTitle
+    updateSong.title = editSong.value.songTitle
   }))
   const newverses:Verse[] = convertEditorJsBlocksToApiVerse(data!.blocks, s.id);
   await DataStore.delete(Verse, todelete => todelete.songID('eq', s.id))
@@ -85,7 +85,7 @@ async function getPageData() {
   if (searchedSong) {
     song.value = searchedSong
     isEditing.value = false
-    editSong.value.songTitle = song.value.songname!
+    editSong.value.songTitle = song.value.title!
   }
   verses.value = (await DataStore.query(Verse))
     .filter((v) => v.songID === song.value.id)

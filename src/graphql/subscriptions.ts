@@ -60,12 +60,13 @@ export const onCreateSong = /* GraphQL */ `
   subscription OnCreateSong {
     onCreateSong {
       id
-      songname
+      title
       editor
       Verses {
         nextToken
         startedAt
       }
+      originalAuthor
       createdAt
       updatedAt
       _version
@@ -78,12 +79,13 @@ export const onUpdateSong = /* GraphQL */ `
   subscription OnUpdateSong {
     onUpdateSong {
       id
-      songname
+      title
       editor
       Verses {
         nextToken
         startedAt
       }
+      originalAuthor
       createdAt
       updatedAt
       _version
@@ -96,12 +98,13 @@ export const onDeleteSong = /* GraphQL */ `
   subscription OnDeleteSong {
     onDeleteSong {
       id
-      songname
+      title
       editor
       Verses {
         nextToken
         startedAt
       }
+      originalAuthor
       createdAt
       updatedAt
       _version
